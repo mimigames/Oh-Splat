@@ -31,8 +31,5 @@ public class BirdControls : MonoBehaviour {
             body.transform.Translate(Vector3.left * Time.deltaTime * strafeSpeed);
         }
 
-        if (Input.GetButtonUp("Horizontal")) {
-            body.transform.Translate(Vector3.zero * Time.deltaTime * strafeSpeed);
-        }
     }
 }
