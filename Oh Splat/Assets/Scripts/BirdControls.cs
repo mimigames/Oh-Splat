@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BirdControls : MonoBehaviour {
 
-
+    public float maxOffCenter;
     public float forwardSpeed;
     public float strafeSpeed;
 
@@ -14,18 +14,25 @@ public class BirdControls : MonoBehaviour {
     // Use this for initialization
     void Start() {
         body = transform.FindChild("Body").gameObject;
-        horizontalAxis = Input.GetAxis("Horizontal");
     }
 
     // Update is called once per frame
     void Update() {
+        horizontalAxis = Input.GetAxis("Horizontal");
+
+        //Bird flies forwards
         transform.Translate(Vector3.forward * Time.deltaTime * forwardSpeed);
 
-        if (horizontalAxis > 0) {
+        //Strafing
+        if (horizontalAxis > 0 && body.transform.position.x < maxOffCenter) {
             body.transform.Translate(Vector3.right * Time.deltaTime * strafeSpeed);
         }
-        else if (horizontalAxis < 0) {
+        else if (horizontalAxis < 0 && body.transform.position.x > -maxOffCenter) {
             body.transform.Translate(Vector3.left * Time.deltaTime * strafeSpeed);
+        }
+
+        if (Input.GetButtonUp("Horizontal")) {
+            body.transform.Translate(Vector3.zero * Time.deltaTime * strafeSpeed);
         }
     }
 }
