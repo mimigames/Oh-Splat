@@ -12,6 +12,7 @@ public class BirdControls : MonoBehaviour {
     private GameObject hitBox;
 
     private float horizontalAxis;
+    private float horizontalAccel;
 
     // Use this for initialization
     void Start() {
@@ -22,16 +23,21 @@ public class BirdControls : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         horizontalAxis = Input.GetAxis("Horizontal");
+        horizontalAccel = Input.acceleration.x;
 
         //Bird flies forwards
         transform.Translate(Vector3.forward * Time.deltaTime * forwardSpeed);
 
         //Strafing
-        if (horizontalAxis > 0 && hitBox.transform.position.x < maxOffCenter) {
-            hitBox.transform.Translate(Vector3.right * Time.deltaTime * strafeSpeed);
-        }
-        else if (horizontalAxis < 0 && hitBox.transform.position.x > -maxOffCenter) {
-            hitBox.transform.Translate(Vector3.left * Time.deltaTime * strafeSpeed);
-        }
+        //if (horizontalAxis > 0 && hitBox.transform.position.x < maxOffCenter) {
+        //    hitBox.transform.Translate(Vector3.right * Time.deltaTime * strafeSpeed);
+        //}
+        //else if (horizontalAxis < 0 && hitBox.transform.position.x > -maxOffCenter) {
+        //    hitBox.transform.Translate(Vector3.left * Time.deltaTime * strafeSpeed);
+        //}
+
+        hitBox.transform.Translate(Vector3.right * Time.deltaTime * horizontalAccel);
+
+
     }
 }
