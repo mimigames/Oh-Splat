@@ -23,7 +23,7 @@ public class BirdControls : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         horizontalAxis = Input.GetAxis("Horizontal");
-        horizontalAccel = Input.acceleration.x;
+        horizontalAccel = Input.acceleration.y;
 
         //Bird flies forwards
         transform.Translate(Vector3.forward * Time.deltaTime * forwardSpeed);
