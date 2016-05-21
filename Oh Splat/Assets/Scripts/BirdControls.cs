@@ -14,6 +14,8 @@ public class BirdControls : MonoBehaviour {
     private float horizontalAxis;
     private float horizontalAccel;
 
+    private Quaternion newRotation;
+
     // Use this for initialization
     void Start() {
         hitBox = transform.FindChild("HitBox").gameObject;
@@ -37,11 +39,25 @@ public class BirdControls : MonoBehaviour {
         else if (horizontalAxis < 0 && hitBox.transform.position.x > -maxOffCenter) {
             hitBox.transform.Translate(Vector3.left * Time.deltaTime * strafeSpeed);
         }
+
+        TiltBird(horizontalAxis);
 #endif
 
 #if UNITY_ANDROID
         hitBox.transform.Translate(Vector3.right * Time.deltaTime * horizontalAccel * strafeSpeed);
+        TiltBird(horizontalAccel);
 #endif
+    }
 
+    private void TiltBird(float tilt) {
+        newRotation = body.transform.rotation;
+        newRotation.x = 0f;
+        newRotation.y = 0f;
+        newRotation.z = tilt;
+
+        if (newRotation.z <= -15) newRotation.z = -15;
+        if (newRotation.z >= 15) newRotation.z = 15;
+
+        body.transform.rotation = newRotation;
     }
 }
