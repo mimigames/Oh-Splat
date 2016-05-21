@@ -36,7 +36,7 @@ public class BirdControls : MonoBehaviour {
         //    hitBox.transform.Translate(Vector3.left * Time.deltaTime * strafeSpeed);
         //}
 
-        hitBox.transform.Translate(Vector3.right * Time.deltaTime * horizontalAccel);
+        hitBox.transform.Translate(Vector3.right * Time.deltaTime * horizontalAccel * strafeSpeed);
 
 
     }
