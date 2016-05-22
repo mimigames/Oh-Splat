@@ -8,13 +8,17 @@ public class BirdControls : MonoBehaviour {
     public float strafeSpeed;
     public float turnSpeed;
 
+    public GameObject poop;
     private GameObject body;
     private GameObject hitBox;
+    private GameObject instantiatedPoop;
 
     private float horizontalAxis;
     private float horizontalAccel;
 
     private Quaternion newRotation;
+
+    private bool poopPressed = false;
 
     // Use this for initialization
     void Start() {
@@ -24,6 +28,23 @@ public class BirdControls : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        handleMovement();
+
+        if (Input.GetAxis("Poop") != 0f)
+            if (Input.GetAxisRaw("Poop") != 0) {
+                if (poopPressed == false) {
+                    // Call your event function here.
+                    Poop();
+
+                    poopPressed = true;
+                }
+            }
+        if (Input.GetAxisRaw("Poop") == 0) {
+            poopPressed = false;
+        }
+    }
+
+    private void handleMovement() {
         horizontalAxis = Input.GetAxis("Horizontal");
         horizontalAccel = Input.acceleration.x;
 
@@ -59,5 +80,10 @@ public class BirdControls : MonoBehaviour {
         if (newRotation.z >= 15) newRotation.z = 15;
 
         body.transform.rotation = newRotation;
+    }
+
+    private void Poop() {
+        instantiatedPoop = Instantiate(poop, hitBox.transform.position, hitBox.transform.rotation) as GameObject;
+        instantiatedPoop.GetComponent<PoopScript>().forwardSpeed = forwardSpeed;
     }
 }
