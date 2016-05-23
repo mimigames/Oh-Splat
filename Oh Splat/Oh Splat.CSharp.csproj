@@ -70,7 +70,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Cartoon City Pack\Scripts\MoveCamera.cs" />
-    <Compile Include="Assets\Cartoon City Pack\Scripts\TakeScreenshotInEditor.cs" />
     <Compile Include="Assets\Cartoon City Pack\Standard Assets\Character Controllers\Sources\Scripts\MouseLook.cs" />
     <Compile Include="Assets\Cartoon City Pack\Standard Assets\Image Effects (Pro Only)\BlurEffect.cs" />
     <Compile Include="Assets\Cartoon City Pack\Standard Assets\Image Effects (Pro Only)\ColorCorrectionEffect.cs" />
